@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql2");
 const EmployeeDB = require("./classes/Employee");
+const cTable = require("console.table");
 let newEmployeeDB;
 
 const team = mysql.createConnection({

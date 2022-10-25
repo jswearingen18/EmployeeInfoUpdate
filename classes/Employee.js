@@ -1,5 +1,3 @@
-require("console.table");
-
 class EmployeeDB {
   constructor(team) {
     this.team = team;
