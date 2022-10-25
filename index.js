@@ -4,7 +4,7 @@ inquirer.prompt([
     { name: "mainMenu",
       message: "What would you like to do?",
       type: "list",
-      choices: ["View All Employees", "Add Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Department"],
+      choices: ["View All Employees", "Add Employee", "Update Employee Role", "View All Roles", "Add Role", "View All Departments", "Add Department", "Exit Program"],
     }
 ])
 .then((answer) => {
