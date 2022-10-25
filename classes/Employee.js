@@ -39,6 +39,49 @@ class EmployeeDB {
       }
     );
   }
+  viewRoles(department_id, title, salary, menu) {
+    this.team.query(
+      `SELECT department_id, title, salary FROM employee_role;`,
+      [department_id, title, salary],
+      (err, data) => {
+        if (err) throw err;
+        console.log(data);
+        menu();
+      }
+    );
+  }
+  addRole(department_id, roleTitle, salary, menu) {
+    this.team.query(
+      `INSERT INTO employee_role (department_id, title, salary) VALUES (?,?,?)`,
+      [department_id, roleTitle, salary],
+      (err, data) => {
+        if (err) throw err;
+        console.log(data);
+        menu();
+      }
+    );
+  }
+  viewDepartments(departments, menu) {
+    this.team.query(
+      `SELECT department_name FROM department;`,
+      [departments],
+      (err, data) => {
+        if (err) throw err;
+        console.log(data);
+        menu();
+      }
+    );
+  }
+  addDepartment(departmentName, menu) {
+    this.team.query(
+      `INSERT INTO department (department_name) VALUES (?)`,
+      [departmentName],
+      (err, data) => {
+        if (err) throw err;
+        console.log(data);
+        menu();
+      }
+    );
+  }
 }
-
 module.exports = EmployeeDB;

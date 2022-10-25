@@ -41,37 +41,18 @@ const menu = () => {
         addEmployee();
       } else if (answer.mainMenu === "Update Employee Role") {
         updateRole();
+      } else if (answer.mainMenu === "View All Roles") {
+        viewRoles();
       } else if (answer.mainMenu === "Add Role") {
-        inquirer.prompt([
-          {
-            name: "newRoleDepartmentId",
-            message: "What department will the new role be assigned to?",
-            type: "input",
-          },
-          {
-            name: "addNewRoleTitle",
-            message: "What is the title of the new role?",
-            type: "input",
-          },
-          {
-            name: "addNewRoleSalary",
-            message:
-              "What is the starting salary of the new role? (Must be an 8 digit number with a decimal 2 spaces from right",
-            type: "input",
-          },
-        ]);
+        addRole();
+      } else if (answer.mainMenu === "View All Departments") {
+        viewDepartments();
       } else if (answer.mainMenu === "Add Department") {
-        inquirer.prompt([
-          {
-            name: "addNewDepartmentTitle",
-            message: "What is the title of the new department?",
-            type: "input",
-          },
-        ]);
+        addDepartment();
       }
     });
 };
-const viewEmployee = (menu) => {
+const viewEmployee = () => {
   newEmployeeDB.viewEmployee(menu);
 };
 const addEmployee = () => {
@@ -91,7 +72,10 @@ const addEmployee = () => {
         name: "managerId",
         message: "What manager is the Employee assigned to if applicable?",
         type: "list",
-        choices: [{ name: "Hama Nephthys", value: 100 }],
+        choices: [
+          { name: "null", value: null },
+          { name: "Hama Nephthys", value: 100 },
+        ],
       },
       {
         name: "addRole",
@@ -134,7 +118,7 @@ const updateRole = () => {
         ],
       },
       {
-        name: "updateRole",
+        name: "updateRoles",
         message: "What is the Employee's new role?",
         type: "list",
         choices: [
@@ -152,8 +136,60 @@ const updateRole = () => {
     .then((response) => {
       newEmployeeDB.updateRole(
         response.selectEmployee,
-        response.updateRole,
+        response.updateRoles,
         menu
       );
+    });
+};
+const viewRoles = () => {
+  newEmployeeDB.viewRoles(menu);
+};
+const addRole = () => {
+  inquirer
+    .prompt([
+      {
+        name: "departmentId",
+        message: "What department will the new role be assigned to?",
+        type: "list",
+        choices: [
+          { name: "Web Developer", value: 1 },
+          { name: "Computer Programmer", value: 2 },
+          { name: "Computer Engineer", value: 3 },
+        ],
+      },
+      {
+        name: "newRole",
+        message: "What is the title of the new role?",
+        type: "input",
+      },
+      {
+        name: "roleSalary",
+        message: "What is the starting salary of the new role?",
+        type: "input",
+      },
+    ])
+    .then((response) => {
+      newEmployeeDB.addRole(
+        response.departmentId,
+        response.newRole,
+        response.roleSalary,
+        menu
+      );
+    });
+};
+const viewDepartments = () => {
+  newEmployeeDB.viewDepartments(menu);
+};
+const addDepartment = () => {
+  inquirer
+    .prompt([
+      {
+        name: "newDepartment",
+        message: "What is the title of the new department?",
+        type: "input",
+      },
+    ])
+    .then((response) => {
+      newEmployeeDB.addDepartment(response.newDepartment, menu);
     });
 };
