@@ -1,7 +1,9 @@
+// Setup Class EmployeeDB
 class EmployeeDB {
   constructor(team) {
     this.team = team;
   }
+  // Function that allows user to view the employee table of the DB
   viewEmployee(id, firstname, lastname, menu) {
     this.team.query(
       `SELECT id, first_name, last_name FROM employee;`,
@@ -13,6 +15,7 @@ class EmployeeDB {
       }
     );
   }
+  // Function to add employees into the DB
   addEmployee(firstname, lastname, role_id, manager_id, menu) {
     this.team.query(
       `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)`,
@@ -24,6 +27,7 @@ class EmployeeDB {
       }
     );
   }
+  // Function to update the role that an employee is in
   updateRole(role_id, lastname, menu) {
     this.team.query(
       `UPDATE employee
@@ -37,6 +41,7 @@ class EmployeeDB {
       }
     );
   }
+  // Function that allows user to view the employee_role table of the DB
   viewRoles(department_id, title, salary, menu) {
     this.team.query(
       `SELECT department_id, title, salary FROM employee_role;`,
@@ -48,6 +53,7 @@ class EmployeeDB {
       }
     );
   }
+  // Function to add roles into the DB
   addRole(department_id, roleTitle, salary, menu) {
     this.team.query(
       `INSERT INTO employee_role (department_id, title, salary) VALUES (?,?,?)`,
@@ -59,6 +65,7 @@ class EmployeeDB {
       }
     );
   }
+  // Function that allows user to view the department table of the DB
   viewDepartments(departments, menu) {
     this.team.query(
       `SELECT department_name FROM department;`,
@@ -70,6 +77,7 @@ class EmployeeDB {
       }
     );
   }
+  // Function to add employees into the DB
   addDepartment(departmentName, menu) {
     this.team.query(
       `INSERT INTO department (department_name) VALUES (?)`,
@@ -82,4 +90,5 @@ class EmployeeDB {
     );
   }
 }
+// Exports the EmployeeDB
 module.exports = EmployeeDB;

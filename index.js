@@ -3,7 +3,7 @@ const mysql = require("mysql2");
 const EmployeeDB = require("./classes/Employee");
 const cTable = require("console.table");
 let newEmployeeDB;
-
+// Set up a localhost connection to create a path to mysql DB
 const team = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -15,7 +15,7 @@ team.connect((err) => {
   newEmployeeDB = new EmployeeDB(team);
   menu();
 });
-
+// Function to create the main menu available to user
 const menu = () => {
   inquirer
     .prompt([
@@ -53,9 +53,11 @@ const menu = () => {
       }
     });
 };
+// Function to view the employees in the DB
 const viewEmployee = () => {
   newEmployeeDB.viewEmployee(menu);
 };
+// Function to add employees to the DB
 const addEmployee = () => {
   inquirer
     .prompt([
@@ -104,6 +106,7 @@ const addEmployee = () => {
       );
     });
 };
+// Function to update the roles of employees that exist in the DB
 const updateRole = () => {
   inquirer
     .prompt([
@@ -142,9 +145,11 @@ const updateRole = () => {
       );
     });
 };
+// Function to view all roles in the DB
 const viewRoles = () => {
   newEmployeeDB.viewRoles(menu);
 };
+// Function to add roles to the DB
 const addRole = () => {
   inquirer
     .prompt([
@@ -178,9 +183,11 @@ const addRole = () => {
       );
     });
 };
+// Function to view current departments in the DB
 const viewDepartments = () => {
   newEmployeeDB.viewDepartments(menu);
 };
+// Function to add a new department to the DB
 const addDepartment = () => {
   inquirer
     .prompt([
