@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const { createConnection } = require('net');
 
 inquirer.prompt([
     { name: "mainMenu",
@@ -10,19 +11,6 @@ inquirer.prompt([
 .then((answer) => {
     if (answer.mainMenu === "Add Employee") {
         inquirer.prompt([
-            { name: "addEmployeeId",
-              message: "What is the employee Id?",
-              type: "input"
-            },
-            { name: "addEmployeeDepartmentId",
-              message: "What department will the Employee be in?",
-              type: "choices",
-              choices: ["Web Developer", "Computer Programmer", "Computer Engineer"],
-            },
-            { name: "addManagerId",
-              message: "What manager is the Employee assigned to if applicable?",
-              type: "input",
-            },
             { name: "addEmployeeFirstName",
               message: "What is the Employee's first name?",
               type: "input",
@@ -30,6 +18,16 @@ inquirer.prompt([
             { name: "addEmployeeLastName",
               message: "What is the Employees's last name?",
               type: "input",
+            },
+            { name: "addManagerId",
+              message: "What manager is the Employee assigned to if applicable?",
+              type: "list",
+              choices: ["Hama Nephthys"],
+            },
+              { name: "addEmployeeRole",
+              message: "What role will the Employee be in?",
+              type: "list",
+              choices: ["Front-End Developer", "Back-End Developer", "Full-Stack Developer", "Database Administrator", "Program Tester", "SoftWare Engineer", "Hardware Engineer", "Computer Engineer"],
             },
         ])
     } else if (answer.mainMenu === "Update Employee Role") {
