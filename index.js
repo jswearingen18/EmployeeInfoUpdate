@@ -50,6 +50,9 @@ const menu = () => {
         viewDepartments();
       } else if (answer.mainMenu === "Add Department") {
         addDepartment();
+      } else if (answer.mainMenu === "Exit Program") {
+        console.log("Goodbye, Thank you for using EmployeeInfoUpdate!");
+        return;
       }
     });
 };
@@ -115,10 +118,10 @@ const updateRole = () => {
         message: "Which employee are you updating?",
         type: "list",
         choices: [
-          { name: "Hama Nephthys", value: 100 },
-          { name: "Ninsun Eogan", value: 101 },
-          { name: "Neptuno Janaina", value: 102 },
-          { name: "Sunita Dazhdbog", value: 103 },
+          { name: "Nephthys", value: 100 },
+          { name: "Eogan", value: 101 },
+          { name: "Janaina", value: 102 },
+          { name: "Dazhdbog", value: 103 },
         ],
       },
       {

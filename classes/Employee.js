@@ -4,13 +4,12 @@ class EmployeeDB {
     this.team = team;
   }
   // Function that allows user to view the employee table of the DB
-  viewEmployee(id, firstname, lastname, menu) {
+  viewEmployee(menu) {
     this.team.query(
       `SELECT id, first_name, last_name FROM employee;`,
-      [id, firstname, lastname],
       (err, data) => {
         if (err) throw err;
-        console.log(data);
+        console.table(data);
         menu();
       }
     );
@@ -28,12 +27,13 @@ class EmployeeDB {
     );
   }
   // Function to update the role that an employee is in
-  updateRole(role_id, lastname, menu) {
+  updateRole(role_id, last_name, menu) {
+    console.log(role_id, last_name);
     this.team.query(
       `UPDATE employee
        SET role_id = (?)
        WHERE last_name = (?)`,
-      [role_id, lastname],
+       [role_id, last_name],
       (err, data) => {
         if (err) throw err;
         console.log(data);
@@ -42,13 +42,12 @@ class EmployeeDB {
     );
   }
   // Function that allows user to view the employee_role table of the DB
-  viewRoles(department_id, title, salary, menu) {
+  viewRoles(menu) {
     this.team.query(
       `SELECT department_id, title, salary FROM employee_role;`,
-      [department_id, title, salary],
       (err, data) => {
         if (err) throw err;
-        console.log(data);
+        console.table(data);
         menu();
       }
     );
@@ -66,16 +65,12 @@ class EmployeeDB {
     );
   }
   // Function that allows user to view the department table of the DB
-  viewDepartments(departments, menu) {
-    this.team.query(
-      `SELECT department_name FROM department;`,
-      [departments],
-      (err, data) => {
-        if (err) throw err;
-        console.log(data);
-        menu();
-      }
-    );
+  viewDepartments(menu) {
+    this.team.query(`SELECT department_name FROM department;`, (err, data) => {
+      if (err) throw err;
+      console.table(data);
+      menu();
+    });
   }
   // Function to add employees into the DB
   addDepartment(departmentName, menu) {
