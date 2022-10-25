@@ -1,5 +1,8 @@
 const inquirer = require('inquirer');
+const Employee = require('./classes/newEmployee')
 const { createConnection } = require('net');
+
+const employee = new Employee();
 
 inquirer.prompt([
     { name: "mainMenu",
@@ -10,26 +13,7 @@ inquirer.prompt([
 ])
 .then((answer) => {
     if (answer.mainMenu === "Add Employee") {
-        inquirer.prompt([
-            { name: "addEmployeeFirstName",
-              message: "What is the Employee's first name?",
-              type: "input",
-            },
-            { name: "addEmployeeLastName",
-              message: "What is the Employees's last name?",
-              type: "input",
-            },
-            { name: "addManagerId",
-              message: "What manager is the Employee assigned to if applicable?",
-              type: "list",
-              choices: ["Hama Nephthys"],
-            },
-              { name: "addEmployeeRole",
-              message: "What role will the Employee be in?",
-              type: "list",
-              choices: ["Front-End Developer", "Back-End Developer", "Full-Stack Developer", "Database Administrator", "Program Tester", "SoftWare Engineer", "Hardware Engineer", "Computer Engineer"],
-            },
-        ])
+        employee.createNewEmployee();
     } else if (answer.mainMenu === "Update Employee Role") {
         inquirer.prompt([
             { name: "updateEmployeeRole",
@@ -39,10 +23,6 @@ inquirer.prompt([
         ])
     } else if (answer.mainMenu === "Add Role") {
         inquirer.prompt([
-            { name: "addNewRoleId",
-              message: "What is the new role Id you would like to add?",
-              type: "input",
-            },
             { name: "newRoleDepartmentId",
               message: "What department will the new role be assigned to?",
               type: "input",
@@ -58,10 +38,6 @@ inquirer.prompt([
         ])
     } else if (answer.mainMenu === "Add Department") {
         inquirer.prompt([
-            { name: "addNewDepartment",
-              message: "What is the new department Id?",
-              type: "input",
-            },
             { name: "addNewDepartmentTitle",
               message: "What is the title of the new department?",
               type: "input",
